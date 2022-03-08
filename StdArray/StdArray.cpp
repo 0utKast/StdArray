@@ -69,7 +69,7 @@ int main()
 #include <array>
 #include <iostream>
 
-void imprimirTam(const std::array<double, 5 > &miArray)
+void imprimirTam(const std::array <double,5> &miArray)
 {
 	std::cout << "tamaño: " << miArray.size() << '\n';
 }
@@ -95,7 +95,7 @@ int main()
 	for (int elemento : myArray)
 		std::cout << elemento << ' ';
 }
-#endif
+
 
 
 #include <algorithm> // para std::sort
@@ -116,6 +116,118 @@ int main()
 	return 0;
 }
 
+
+
+
+
+#include <array>
+#include <iostream>
+
+void imprimirArray(const std::array<double,5> &miArray)
+{
+	for (auto elemento : miArray)
+		std::cout << elemento << ' ';
+	std::cout << '\n';
+}
+
+int main()
+{
+	std::array miArray5{ 9.0, 7.2, 5.4, 3.6, 1.8 }; // tipo deducido como std::array<double, 5>
+	imprimirArray(miArray5); // su tipo y tamaño coincide con los que espera la función
+	std::array miArray2{ 9, 7, 5, 3, 1 }; // tipo deducido como std::array<int, 5>
+	imprimirArray(miArray2);
+	
+
+	return 0;
+}
+
+
+
+
+
+
+#include <array>
+#include <cstddef>
+#include <iostream>
+
+// imprimirArray es una plantilla de función
+template <typename T, std::size_t tamanho> // parametriza el tipo y el tamaño
+void imprimirArray(const std::array<T, tamanho> &miArray)
+{
+	for (auto elemento : miArray)
+		std::cout << elemento << ' ';
+	std::cout << '\n';
+}
+
+int main()
+{
+	std::array <double, 5> miArray5{ 7.0, 3.2, 6.4, 2.6, 1.8 };
+	imprimirArray(miArray5);
+
+	std::array <double, 7> miArray7{ 8.0, 5.2, 2.4, 7.6, 2.8, 1.2, 0.7 };
+	imprimirArray(miArray7);
+
+	std::array <int, 4> miArray4{ 3, 5, 7, 4 };
+	imprimirArray(miArray4);
+
+	return 0;
+}
+
+
+
+#include <iostream>
+
+int main()
+{
+	std::cout << sizeof(int) << '\n';
+
+	return 0;
+}
+
+
+
+
+
+#include <cstddef> // std::size_t
+#include <iostream>
+
+int main()
+{
+	std::cout << sizeof(std::size_t) << '\n';
+
+	return 0;
+}
+#endif
+
+
+#include <array>
+#include <iostream>
+
+struct Casa
+{
+	int numero{};
+	int pisos{};
+	int vivPorPiso{};
+};
+
+int main()
+{
+	std::array<Casa, 4> casas{};
+
+	casas[0] = { 13, 4, 30 };
+	casas[1] = { 14, 3, 10 };
+	casas[2] = { 15, 3, 40 };
+	casas[3] = { 16, 2, 12 };
+
+	for (const auto &viviendas : casas)
+	{
+		std::cout << "Casa Num. " << viviendas.numero
+			<< " tiene " << (viviendas.pisos * viviendas.vivPorPiso)
+			<< " viviendas\n";
+	}
+
+	return 0;
+}
 
 #if 0
 #endif
